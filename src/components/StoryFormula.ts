@@ -1,4 +1,5 @@
 export type StoryFormula = {
+  id: string;
   name: string;
   source?: string;
   description?: string;

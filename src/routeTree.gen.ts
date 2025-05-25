@@ -12,8 +12,9 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SpreadsImport } from './routes/spreads'
-import { Route as FormulaeImport } from './routes/formulae'
 import { Route as IndexImport } from './routes/index'
+import { Route as FormulaeIndexImport } from './routes/formulae/index'
+import { Route as FormulaeFormulaIdImport } from './routes/formulae/$formulaId'
 
 // Create/Update Routes
 
@@ -23,15 +24,21 @@ const SpreadsRoute = SpreadsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const FormulaeRoute = FormulaeImport.update({
-  id: '/formulae',
-  path: '/formulae',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormulaeIndexRoute = FormulaeIndexImport.update({
+  id: '/formulae/',
+  path: '/formulae/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormulaeFormulaIdRoute = FormulaeFormulaIdImport.update({
+  id: '/formulae/$formulaId',
+  path: '/formulae/$formulaId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,18 +53,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/formulae': {
-      id: '/formulae'
-      path: '/formulae'
-      fullPath: '/formulae'
-      preLoaderRoute: typeof FormulaeImport
-      parentRoute: typeof rootRoute
-    }
     '/spreads': {
       id: '/spreads'
       path: '/spreads'
       fullPath: '/spreads'
       preLoaderRoute: typeof SpreadsImport
+      parentRoute: typeof rootRoute
+    }
+    '/formulae/$formulaId': {
+      id: '/formulae/$formulaId'
+      path: '/formulae/$formulaId'
+      fullPath: '/formulae/$formulaId'
+      preLoaderRoute: typeof FormulaeFormulaIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/formulae/': {
+      id: '/formulae/'
+      path: '/formulae'
+      fullPath: '/formulae'
+      preLoaderRoute: typeof FormulaeIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -67,42 +81,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/formulae': typeof FormulaeRoute
   '/spreads': typeof SpreadsRoute
+  '/formulae/$formulaId': typeof FormulaeFormulaIdRoute
+  '/formulae': typeof FormulaeIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/formulae': typeof FormulaeRoute
   '/spreads': typeof SpreadsRoute
+  '/formulae/$formulaId': typeof FormulaeFormulaIdRoute
+  '/formulae': typeof FormulaeIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/formulae': typeof FormulaeRoute
   '/spreads': typeof SpreadsRoute
+  '/formulae/$formulaId': typeof FormulaeFormulaIdRoute
+  '/formulae/': typeof FormulaeIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/formulae' | '/spreads'
+  fullPaths: '/' | '/spreads' | '/formulae/$formulaId' | '/formulae'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/formulae' | '/spreads'
-  id: '__root__' | '/' | '/formulae' | '/spreads'
+  to: '/' | '/spreads' | '/formulae/$formulaId' | '/formulae'
+  id: '__root__' | '/' | '/spreads' | '/formulae/$formulaId' | '/formulae/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  FormulaeRoute: typeof FormulaeRoute
   SpreadsRoute: typeof SpreadsRoute
+  FormulaeFormulaIdRoute: typeof FormulaeFormulaIdRoute
+  FormulaeIndexRoute: typeof FormulaeIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  FormulaeRoute: FormulaeRoute,
   SpreadsRoute: SpreadsRoute,
+  FormulaeFormulaIdRoute: FormulaeFormulaIdRoute,
+  FormulaeIndexRoute: FormulaeIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,18 +135,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/formulae",
-        "/spreads"
+        "/spreads",
+        "/formulae/$formulaId",
+        "/formulae/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/formulae": {
-      "filePath": "formulae.tsx"
-    },
     "/spreads": {
       "filePath": "spreads.tsx"
+    },
+    "/formulae/$formulaId": {
+      "filePath": "formulae/$formulaId.tsx"
+    },
+    "/formulae/": {
+      "filePath": "formulae/index.tsx"
     }
   }
 }

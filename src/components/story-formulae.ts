@@ -2,6 +2,7 @@ import type { Progression, StoryFormula } from "./StoryFormula";
 
 const formulae: StoryFormula[] = [
   {
+    id:"e19408d4",
     name: "Freytag's Pyramid",
     source: "https://blog.reedsy.com/guide/story-structure/",
     progression: [
@@ -55,6 +56,7 @@ const formulae: StoryFormula[] = [
     ],
   },
   {
+    id:"864599c8",
     name: "The Hero's Journey",
     source: "https://blog.reedsy.com/guide/story-structure/",
     description:
@@ -123,21 +125,25 @@ const formulae: StoryFormula[] = [
     ],
   },
   {
+    id: "ba9cb70b",
     name: "Three Act Structure",
     source: "https://blog.reedsy.com/guide/story-structure/",
     progression: [],
   },
   {
+    id: "bf2c357f",
     name: "Dan Harmon's Story Circle",
     source: "https://blog.reedsy.com/guide/story-structure/",
     progression: [],
   },
   {
+    id: "da37faf3",
     name: "Ficktean Curve",
     source: "https://blog.reedsy.com/guide/story-structure/",
     progression: [],
   },
   {
+    id: "a6ee3f58",
     name: "Save the Cat (Beat Sheet)",
     source: "https://blog.reedsy.com/guide/story-structure/",
     progression: [
@@ -157,11 +163,13 @@ const formulae: StoryFormula[] = [
     ],
   },
   {
+    id: "1cb3f102",
     name: "Seven-Point Story Structure",
     source: "https://blog.reedsy.com/guide/story-structure/",
     progression: [],
   },
   {
+    id: "651a2de8",
     name: "Vonnegut's Man in a Hole",
     examples: ["The Wizard of Oz"],
     source:
@@ -183,6 +191,7 @@ const formulae: StoryFormula[] = [
     ],
   },
   {
+    id: "9b4513e9",
     name: "Vonnegut's Boy Meets Girl",
     examples: ["Grease"],
     source:
@@ -207,6 +216,7 @@ const formulae: StoryFormula[] = [
     ],
   },
   {
+    id: "e5d2fb25",
     name: "Vonnegut's Cinderella",
     source:
       "https://storyempire.com/2021/02/12/basic-plots-vonneguts-cinderella",

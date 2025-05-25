@@ -6,7 +6,7 @@ export const Route = createRootRoute({
     <>
       <nav className="navbar navbar-expand bg-body-tertiary mb-3">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">Storybook Tools</a>
+          <a className="navbar-brand" href="/">Jon's Storybook Tools</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
