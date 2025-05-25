@@ -1,0 +1,16 @@
+.moment > span:nth-child(1) {
+  /* 'type' icon */
+  margin-right: 1em;
+  display: inline-block;
+  width: 2em;
+  text-align: center;
+}
+
+.moment > span:nth-child(3) {
+  /* fortune marker */
+  float: left;
+  position: relative;
+  left: 10em;
+  font-weight: bold;
+  color: red;
+}
