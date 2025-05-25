@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import StoryFormulaList from '../../components/StoryFormulaList'
+import StoryFormulaList from '../components/StoryFormulaList'
 
-export const Route = createFileRoute('/formula/')({
+export const Route = createFileRoute('/formulae')({
   component: RouteComponent,
 })
 
