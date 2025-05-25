@@ -15,7 +15,7 @@ function RouteComponent() {
           <div className="story card mb-3 h-100">
             <div className="card-body">
               <div>
-                <Link to={`/formulae/${f.id}`} className="stretched-link">{f.name}</Link>
+                <Link to={`/formulae/$formulaId`} params={{formulaId:f.id}} className="stretched-link">{f.name}</Link>
               </div>
           
             </div>

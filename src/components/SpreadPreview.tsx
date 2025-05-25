@@ -11,7 +11,7 @@ export const PageSpreadPreview = ({ pages }: { pages: { text: string }[]; }) => 
     const spreads = Array.from({length: spreadCount }, (_, i) => {
         const left = actualPagesPlusCover[i * 2];
         const right = actualPagesPlusCover[i * 2 + 1];
-        return [ left, right ];
+        return [ left, right ] as PageSpread;
     });
     return <>
       <PageSpreads pageSpreads={spreads}/>
@@ -19,11 +19,13 @@ export const PageSpreadPreview = ({ pages }: { pages: { text: string }[]; }) => 
     </>;
 };
 
-const PageSpreads = ({ pageSpreads} : { 
-  pageSpreads: [
+type PageSpread = [
     { pageNumber: number, text?: string } | undefined,
     { pageNumber: number, text?: string } | undefined
-  ][] 
+  ];
+
+const PageSpreads = ({ pageSpreads} : { 
+  pageSpreads: PageSpread[] 
 }) => {
   return <>{pageSpreads.map((pages, i) => (
       <div
@@ -71,17 +73,17 @@ export const SpreadPreview = ({ sheetCount }: { sheetCount: number; }) => {
   const pageCount = sheetCount * 2 * 2;
 
   const pageSpreads = pageCount === 0
-    ? [[undefined, undefined]]
+    ? [[undefined, undefined] as PageSpread]
     : [
-      [undefined, { pageNumber: 1 }],
+      [undefined, { pageNumber: 1 }] as PageSpread,
       ...(pageCount === 0
         ? []
         : Array.from({ length: pageCount / 2 - 1 },
           (_, i) => [
             { pageNumber: 2 * (i + 1) },
             { pageNumber: 2 * (i + 1) + 1 },
-          ])),
-      [{ pageNumber: pageCount }, undefined],
+          ] as PageSpread)),
+      [{ pageNumber: pageCount }, undefined] as PageSpread,
     ];
 
   return <PageSpreads pageSpreads={pageSpreads} />;
