@@ -13,9 +13,69 @@ export const PageSpreadPreview = ({ pages }: { pages: { text: string }[]; }) => 
         const right = actualPagesPlusCover[i * 2 + 1];
         return [ left, right ] as PageSpread;
     });
+    const spreadPages = spreads.flatMap(ps => ps).filter(p => !!p);
+    const pageCount = actualPages.length;
+    const sheets = Array.from({length: sheetCount}, (_, i) => ({
+      n: i+1,
+      front: {left: pageCount - i * 2, right: 1 + i * 2},
+      back: {left: 2 + i * 2, right: pageCount - 1 - i * 2},
+
+    }));
     return <>
       <PageSpreads pageSpreads={spreads}/>
       <p>Sheets Needed: {sheetCount}</p>
+      
+      <div className="row">
+        <div className="col-6">
+          <table className="sheet-table">
+            <tbody>
+              {sheets.map((sheet, i) => (
+                <>
+                  <tr key={`${i}-front`} className="sheet-front">
+                    <td rowSpan={2}>
+                      Sheet&nbsp;{sheet.n}
+                    </td>
+                    <td className="page page-left"><sub>{sheet.front.left}</sub></td>
+                    <td className="page page-right"><sub>{sheet.front.right}</sub></td>
+                  </tr>
+                  <tr key={`${i}-back`} className="sheet-back">
+                    <td className="page page-left"><sup>{sheet.back.right}</sup></td>
+                    <td className="page page-right"><sup>{sheet.back.left}</sup></td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="col-6">
+          <pre className="card p-2" style={{lineHeight: "1em"}}
+          dangerouslySetInnerHTML={{__html: sheets.map((sheet) => {
+            const padS = (n: number) => n.toString().padStart(2,' ');
+            const padE = (n: number) => n.toString().padEnd(2,' ');
+            return [
+            `&nbsp;     /\\     `,
+              `&nbsp;    /  \\    `,
+              `&nbsp;   /    \\   `,
+              `&nbsp;${padS(sheet.front.left)}/${padE(sheet.back.right)}  ${padS(sheet.back.left)}\\${padE(sheet.front.right)}`
+            ].join('<br/>');
+          }).join("\n")}}/>
+        </div>
+      </div>
+      <h4>For Printing:</h4>
+      <h5>Sheet Fronts:</h5>
+      <PageSpreads pageSpreads={
+        sheets.map(sheet => [
+          spreadPages[sheet.front.left - 1],
+          spreadPages[sheet.front.right - 1]
+        ] as PageSpread)
+      }/>
+      <h5>Sheet Backs:</h5>
+      <PageSpreads pageSpreads={
+        sheets.map(sheet => [
+          spreadPages[sheet.back.left - 1],
+          spreadPages[sheet.back.right - 1]
+        ] as PageSpread)
+      }/>
     </>;
 };
 

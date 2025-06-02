@@ -14,3 +14,27 @@
   font-weight: bold;
   color: red;
 }
+
+.sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sheet-table td.page {
+  width:48%;
+}
+
+.sheet-table tr.sheet-front {
+  border-bottom: 1px solid black;
+}
+
+.sheet-table tr td.page-right { /* right page */
+  border-left: 1px dashed black;
+  text-align: right;
+}
+
+.sheet-table tr.sheet-front:first-child td, 
+.sheet-table tr.sheet-back:last-child td
+{
+  border:none;
+}
